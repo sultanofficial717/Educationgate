@@ -26,27 +26,23 @@ export function Navbar() {
             <img 
               src={logo} 
               alt="Edu-360 Logo" 
-              className="h-14 w-auto transition-transform group-hover:scale-105"
+              className="h-20 w-auto transition-transform group-hover:scale-120
+              "
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => {
-              const isActive = location.pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className={cn(
-                    "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
-                    isActive
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary"
-                  )}
-                >
-                  {link.label}
-                </Link>
+          <div className="flex items-center gap-2 group">
+  <img 
+    src={logo} 
+    alt="Edu-360 Logo" 
+    className="h-28 w-auto transition-transform duration-300 group-hover:scale-105"
+  />
+  {/* Optional: Add text next to logo */}
+  <span className="text-xl font-bold text-primary hidden sm:block">
+    Edu-360
+  </span>
+</Link>
               );
             })}
           </div>

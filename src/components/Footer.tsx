@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { GraduationCap, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const footerLinks = {
   Platform: [
@@ -41,11 +42,9 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-3 lg:col-span-2">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-hero flex items-center justify-center">
-                <GraduationCap className="w-6 h-6" />
-              </div>
-              <span className="font-display font-bold text-xl">Edu-360</span>
+            <Link to="/" className="flex items-center gap-3 mb-4">
+              <img src={logo} alt="Edu-360 Logo" className="h-24 w-auto" />
+              <span className="font-display font-bold text-2xl">EDU360</span>
             </Link>
             <p className="text-primary-foreground/70 text-sm mb-6 max-w-xs">
               Pakistan's most comprehensive education platform helping students achieve their academic dreams.

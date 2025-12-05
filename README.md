@@ -71,3 +71,49 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+
+# Edu-360 Project
+
+## Required Dependencies
+
+This project is built with **React**, **TypeScript**, and **Vite**.
+
+### Installation
+
+To install all required dependencies, run:
+
+```bash
+npm install
+```
+
+### Key Packages
+
+- **Core**: `react`, `react-dom`
+- **Routing**: `react-router-dom`
+- **Styling**: `tailwindcss`, `postcss`, `autoprefixer`, `clsx`, `tailwind-merge`
+- **Icons**: `lucide-react`
+- **Build Tool**: `vite`
+
+### Running the Project
+
+```bash
+npm run dev
+```
+
+# Project Commands
+
+## 1. Install Dependencies
+
+Open your terminal in the project folder and run:
+
+```bash
+npm install
+```
+
+## 2. Run the Project
+
+To start the local development server:
+
+```bash
+npm run dev
+```

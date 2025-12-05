@@ -9,7 +9,7 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-secondary/30" />
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-[hsl(200,100%,70%)]/10" />
       
       {/* Animated Decorative Elements */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float" />
@@ -28,7 +28,7 @@ export function HeroSection() {
       <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8 animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8 animate-fade-in mt-20">
             <Sparkles className="w-4 h-4" />
             Pakistan's #1 University Research Platform
           </div>
@@ -74,7 +74,7 @@ export function HeroSection() {
               { value: "200+", label: "Universities" },
               { value: "5,000+", label: "Programs" },
               { value: "1,500+", label: "Tutors" },
-              { value: "50k+", label: "Students Helped" },
+
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="text-2xl sm:text-3xl font-display font-bold text-foreground">

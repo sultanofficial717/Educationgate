@@ -15,7 +15,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 215 25% 12%;
 
-    --primary: 174 62% 32%;
+    --primary: 150 100% 20%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 210 20% 96%;
@@ -24,7 +24,7 @@
     --muted: 210 15% 94%;
     --muted-foreground: 215 15% 45%;
 
-    --accent: 38 92% 55%;
+    --accent: 100 60% 50%;
     --accent-foreground: 215 25% 12%;
 
     --destructive: 0 84% 60%;
@@ -32,28 +32,28 @@
 
     --border: 214 20% 90%;
     --input: 214 20% 90%;
-    --ring: 174 62% 32%;
+    --ring: 150 100% 20%;
 
     --radius: 0.75rem;
 
     /* Custom tokens */
-    --gradient-hero: linear-gradient(135deg, hsl(174 62% 32%) 0%, hsl(190 60% 40%) 50%, hsl(210 60% 45%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(38 92% 55%) 0%, hsl(28 90% 50%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(150 100% 20%) 0%, hsl(100 60% 50%) 50%, hsl(200 100% 70%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(100 60% 50%) 0%, hsl(200 100% 70%) 100%);
     --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 20% 98%) 100%);
     --gradient-glass: linear-gradient(135deg, hsla(0, 0%, 100%, 0.9) 0%, hsla(0, 0%, 100%, 0.7) 100%);
     
     --shadow-sm: 0 1px 2px hsla(215, 25%, 12%, 0.05);
     --shadow-md: 0 4px 12px hsla(215, 25%, 12%, 0.08);
     --shadow-lg: 0 12px 40px hsla(215, 25%, 12%, 0.12);
-    --shadow-glow: 0 0 40px hsla(174, 62%, 32%, 0.25);
-    --shadow-accent: 0 8px 24px hsla(38, 92%, 55%, 0.3);
+    --shadow-glow: 0 0 40px hsla(150, 100%, 20%, 0.25);
+    --shadow-accent: 0 8px 24px hsla(100, 60%, 50%, 0.3);
 
     --font-display: 'DM Sans', system-ui, sans-serif;
     --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 174 62% 32%;
+    --sidebar-primary: 150 100% 20%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 210 20% 96%;
     --sidebar-accent-foreground: 215 25% 12%;

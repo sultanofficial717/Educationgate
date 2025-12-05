@@ -4,6 +4,7 @@ import { Menu, X, GraduationCap, Calculator, Search, Users, Globe } from "lucide
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { AuthModal } from "@/components/AuthModal";
 
 const navLinks = [
   { href: "/", label: "Home", icon: GraduationCap },
@@ -19,39 +20,49 @@ export function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass">
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <nav className="container mx-auto px-4 sm:px-10 lg:px-10">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-0 group">
             <img 
               src={logo} 
               alt="Edu-360 Logo" 
-              className="h-20 w-auto transition-transform group-hover:scale-120
-              "
+              className="h-24 w-auto transition-transform group-hover:scale-105 mt-2"
             />
+            <span className="text-3xl font-extrabold text-gradient animate-fade-in drop-shadow-sm tracking-tight -ml-2">
+              EDU360
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="flex items-center gap-2 group">
-  <img 
-    src={logo} 
-    alt="Edu-360 Logo" 
-    className="h-28 w-auto transition-transform duration-300 group-hover:scale-105"
-  />
-  {/* Optional: Add text next to logo */}
-  <span className="text-xl font-bold text-primary hidden sm:block">
-    Edu-360
-  </span>
-</Link>
+          <div className="hidden md:flex items-center gap-6">
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className={cn(
+                    "text-sm font-medium transition-colors hover:text-primary",
+                    isActive ? "text-primary" : "text-muted-foreground"
+                  )}
+                >
+                  {link.label}
+                </Link>
               );
             })}
           </div>
 
           {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button variant="accent" size="sm">
-              Get Started
+          <div className="hidden md:flex items-center gap-3">
+            <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10">
+              AI Matcher
             </Button>
+            <AuthModal>
+              <Button variant="accent" size="sm">
+                Get Started
+              </Button>
+            </AuthModal>
           </div>
 
           {/* Mobile Menu Button */}
@@ -91,10 +102,15 @@ export function Navbar() {
                   </Link>
                 );
               })}
-              <div className="pt-4 px-4">
-                <Button variant="accent" className="w-full">
-                  Get Started
+              <div className="pt-4 px-4 flex flex-col gap-3">
+                <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary/10">
+                  AI Matcher
                 </Button>
+                <AuthModal>
+                  <Button variant="accent" className="w-full">
+                    Get Started
+                  </Button>
+                </AuthModal>
               </div>
             </div>
           </div>

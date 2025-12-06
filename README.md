@@ -1,119 +1,78 @@
-# Welcome to your Lovable project
+# 🎓 Edu360 – One Platform for Jobs, Scholarships & Study Abroad
 
-## Project info
+Edu360 is an AI-powered educational and career guidance platform designed to simplify decision-making for students, job-seekers, and HR recruiters. It unifies eligibility checking, university data, financial estimations, and study-abroad guidance—into one smart ecosystem.
 
-**URL**: https://lovable.dev/projects/07c380b6-e564-4a1f-8fb4-48284115867b
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Project Status](https://img.shields.io/badge/status-In%20Development-orange.svg)](https://github.com/yourusername/edu360)
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+##  Vision
 
-**Use Lovable**
+To build Pakistan’s most comprehensive education & career hub where users can instantly check their eligibility, explore opportunities, calculate expenses, and make informed choices for their future.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/07c380b6-e564-4a1f-8fb4-48284115867b) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🧩 Core Features
 
-**Use your preferred IDE**
+### 1️⃣ **AI-Based Eligibility Checker**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+A smart system that evaluates academic records, skill sets, and experience against opportunity requirements for:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+* **Jobs**
+* **Scholarships**
+* **Fellowships**
+* **International opportunities**
 
-Follow these steps:
+**Two User Types:**
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+* **HR & Recruiters:** An advanced screening panel for quickly filtering candidate profiles.
+* **Students:** A guidance tool for checking personal eligibility against multiple criteria.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### 2️⃣ **Pakistan Universities Information Portal**
 
-# Step 3: Install the necessary dependencies.
-npm i
+A complete, structured database for all Pakistani universities, including:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+* Admission criteria & Entry test details
+* Semester fee breakdown & Financial aid availability
+* Programs offered & Department strengths
+* **Merit history** and **Merit Calculator**
+* Hostel & transport details
 
-**Edit a file directly in GitHub**
+### 3️⃣ **Global Study Abroad Portal**
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+A consolidated platform for international education planning:
 
-**Use GitHub Codespaces**
+* Country-wise study requirements
+* Universities’ fee structures & best programs
+* Visa requirements & Application timelines
+* Scholarship options
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### 4️⃣ **Expense Calculator (International)**
 
-## What technologies are used for this project?
+An accurate tool for budgeting international studies, covering:
 
-This project is built with:
+* Tuition cost and living expenses
+* Travel & visa expenses
+* Total yearly & multi-year budget estimation
+* Real-time currency conversion
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### 5️⃣ **Document Management System**
 
-## How can I deploy this project?
+A secure system for storing and managing critical documents:
 
-Simply open [Lovable](https://lovable.dev/projects/07c380b6-e564-4a1f-8fb4-48284115867b) and click on Share -> Publish.
+* **Students:** Securely upload CVs, transcripts, and supporting documents.
+* **HR/Recruiters:** Dedicated view panel for accessing and managing submitted candidate documents.
 
-## Can I connect a custom domain to my Lovable project?
+---
 
-Yes, you can!
+## 🏗️ Tech Stack
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+| Category | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Frontend** | React.js / Next.js | Building a fast, responsive user interface. |
+| **Backend** | Node.js / Express / Flask | Robust API development and business logic. |
+| **Database** | MySQL / PostgreSQL | Structured storage for university and user data. |
+| **AI/ML** | Python + ML-based Rule Engine | Core logic for eligibility checks and data processing. |
+| **Hosting** | Vercel / AWS / Render | Deployment and scaling. |
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
-
-# Edu-360 Project
-
-## Required Dependencies
-
-This project is built with **React**, **TypeScript**, and **Vite**.
-
-### Installation
-
-To install all required dependencies, run:
-
-```bash
-npm install
-```
-
-### Key Packages
-
-- **Core**: `react`, `react-dom`
-- **Routing**: `react-router-dom`
-- **Styling**: `tailwindcss`, `postcss`, `autoprefixer`, `clsx`, `tailwind-merge`
-- **Icons**: `lucide-react`
-- **Build Tool**: `vite`
-
-### Running the Project
-
-```bash
-npm run dev
-```
-
-# Project Commands
-
-## 1. Install Dependencies
-
-Open your terminal in the project folder and run:
-
-```bash
-npm install
-```
-
-## 2. Run the Project
-
-To start the local development server:
-
-```bash
-npm run dev
-```

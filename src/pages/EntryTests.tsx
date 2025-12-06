@@ -4,7 +4,25 @@ import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Calendar, School, Target, BookOpen, Search } from "lucide-react";
+
+const departments = [
+  { value: "all", label: "All Departments" },
+  { value: "medical", label: "Medical & Dental" },
+  { value: "engineering", label: "Engineering" },
+  { value: "computer science", label: "Computer Science & IT" },
+  { value: "business", label: "Business & Management" },
+  { value: "law", label: "Law" },
+  { value: "arts", label: "Arts & Humanities" },
+  { value: "social sciences", label: "Social Sciences" },
+];
 
 const entryTests = [
   {
@@ -92,14 +110,19 @@ const entryTests = [
 const EntryTests = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchType, setSearchType] = useState<"test" | "university">("test");
+  const [selectedDepartment, setSelectedDepartment] = useState("all");
 
   const filteredTests = entryTests.filter((test) => {
     const query = searchQuery.toLowerCase();
-    if (searchType === "test") {
-      return test.name.toLowerCase().includes(query) || test.fullName.toLowerCase().includes(query);
-    } else {
-      return test.universities.toLowerCase().includes(query);
-    }
+    const matchesSearch = searchType === "test" 
+      ? test.name.toLowerCase().includes(query) || test.fullName.toLowerCase().includes(query)
+      : test.universities.toLowerCase().includes(query);
+    
+    const matchesDepartment = selectedDepartment === "all" || 
+      test.scope.toLowerCase().includes(selectedDepartment.toLowerCase()) ||
+      (selectedDepartment === "general" && test.scope.toLowerCase().includes("general"));
+
+    return matchesSearch && matchesDepartment;
   });
 
   return (
@@ -142,16 +165,34 @@ const EntryTests = () => {
                 </div>
               </div>
 
-              {/* Search Bar */}
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <Input
-                  type="text"
-                  placeholder={searchType === "test" ? "Search for a test (e.g., MDCAT, NAT)..." : "Search for a university (e.g., NUST, UET)..."}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 h-12 rounded-xl border-primary/20 focus-visible:ring-primary/20 bg-card shadow-sm"
-                />
+              <div className="flex flex-col sm:flex-row gap-4">
+                {/* Search Bar */}
+                <div className="relative flex-1">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <Input
+                    type="text"
+                    placeholder={searchType === "test" ? "Search for a test..." : "Search for a university..."}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-12 h-12 rounded-xl border-primary/20 focus-visible:ring-primary/20 bg-card shadow-sm"
+                  />
+                </div>
+
+                {/* Department Select */}
+                <div className="w-full sm:w-[200px]">
+                  <Select value={selectedDepartment} onValueChange={setSelectedDepartment}>
+                    <SelectTrigger className="h-12 rounded-xl border-primary/20 bg-card shadow-sm">
+                      <SelectValue placeholder="Select Department" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {departments.map((dept) => (
+                        <SelectItem key={dept.value} value={dept.value}>
+                          {dept.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
             </div>
           </div>

@@ -7,14 +7,16 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Mail } from "lucide-react";
+import { Mail, Minus } from "lucide-react";
 
 export function AuthModal({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [userType, setUserType] = useState<"student" | "recruiter">("student");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,13 +30,45 @@ export function AuthModal({ children }: { children: React.ReactNode }) {
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
+        <DialogClose className="absolute right-12 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+          <Minus className="h-4 w-4" />
+          <span className="sr-only">Minimize</span>
+        </DialogClose>
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center">Welcome to EDU360</DialogTitle>
           <DialogDescription className="text-center">
             Join our community of learners and educators.
           </DialogDescription>
         </DialogHeader>
+
+        {/* User Type Toggle */}
+        <div className="flex justify-center mb-6">
+          <div className="bg-secondary p-1 rounded-full inline-flex relative w-full max-w-[300px]">
+            <div
+              className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-full shadow-sm transition-all duration-300 ease-in-out ${
+                userType === "student" ? "left-1" : "left-[calc(50%)]"
+              }`}
+            />
+            <button
+              onClick={() => setUserType("student")}
+              className={`relative z-10 w-1/2 py-1.5 rounded-full text-sm font-medium transition-colors duration-300 ${
+                userType === "student" ? "text-primary" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Student
+            </button>
+            <button
+              onClick={() => setUserType("recruiter")}
+              className={`relative z-10 w-1/2 py-1.5 rounded-full text-sm font-medium transition-colors duration-300 ${
+                userType === "recruiter" ? "text-primary" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Recruiter
+            </button>
+          </div>
+        </div>
+
         <Tabs defaultValue="signin" className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-4">
             <TabsTrigger value="signin">Sign In</TabsTrigger>

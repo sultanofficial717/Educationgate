@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, GraduationCap, Calculator, Search, Users, Globe } from "lucide-react";
+import { Menu, X, GraduationCap, Calculator, Search, Users, Globe, FileText } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -9,6 +9,7 @@ import { AuthModal } from "@/components/AuthModal";
 const navLinks = [
   { href: "/", label: "Home", icon: GraduationCap },
   { href: "/universities", label: "Universities", icon: Search },
+  { href: "/entry-tests", label: "Entry Tests", icon: FileText },
   { href: "/merit-calculator", label: "Merit Calculator", icon: Calculator },
   { href: "/tutors", label: "Find Tutors", icon: Users },
   { href: "/study-abroad", label: "Study Abroad", icon: Globe },

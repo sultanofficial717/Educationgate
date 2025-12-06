@@ -8,6 +8,7 @@ import Universities from "./pages/Universities";
 import MeritCalculatorPage from "./pages/MeritCalculatorPage";
 import Tutors from "./pages/Tutors";
 import StudyAbroad from "./pages/StudyAbroad";
+import EntryTests from "./pages/EntryTests";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/universities" element={<Universities />} />
           <Route path="/merit-calculator" element={<MeritCalculatorPage />} />
+          <Route path="/entry-tests" element={<EntryTests />} />
           <Route path="/tutors" element={<Tutors />} />
           <Route path="/study-abroad" element={<StudyAbroad />} />
           <Route path="*" element={<NotFound />} />

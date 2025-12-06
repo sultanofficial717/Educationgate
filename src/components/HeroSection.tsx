@@ -30,7 +30,7 @@ export function HeroSection() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8 animate-fade-in mt-20">
             <Sparkles className="w-4 h-4" />
-            Pakistan's #1 University Research Platform
+            Pakistan's #1 AI Powered Education Platform
           </div>
 
           {/* Main Heading */}

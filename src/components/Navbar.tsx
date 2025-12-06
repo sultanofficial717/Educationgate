@@ -24,15 +24,20 @@ export function Navbar() {
       <nav className="container mx-auto px-4 sm:px-10 lg:px-10">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-0 group">
+          <Link to="/" className="flex items-center gap-2 group">
             <img 
               src={logo} 
               alt="Edu-360 Logo" 
-              className="h-24 w-auto transition-transform group-hover:scale-105 mt-2"
+              className="h-16 w-auto transition-transform group-hover:scale-105"
             />
-            <span className="text-3xl font-extrabold text-gradient animate-fade-in drop-shadow-sm tracking-tight -ml-2">
-              EDU360
-            </span>
+            <div className="flex flex-col">
+              <span className="text-2xl font-extrabold text-gradient animate-fade-in drop-shadow-sm tracking-tight leading-none">
+                EDU360
+              </span>
+              <span className="text-[10px] font-bold text-primary tracking-widest uppercase leading-tight">
+                Education for Everyone
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -56,9 +61,11 @@ export function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10">
-              AI Matcher
-            </Button>
+            <AuthModal>
+              <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10">
+                AI Matcher
+              </Button>
+            </AuthModal>
             <AuthModal>
               <Button variant="accent" size="sm">
                 Get Started
@@ -104,9 +111,11 @@ export function Navbar() {
                 );
               })}
               <div className="pt-4 px-4 flex flex-col gap-3">
-                <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary/10">
-                  AI Matcher
-                </Button>
+                <AuthModal>
+                  <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary/10">
+                    AI Matcher
+                  </Button>
+                </AuthModal>
                 <AuthModal>
                   <Button variant="accent" className="w-full">
                     Get Started

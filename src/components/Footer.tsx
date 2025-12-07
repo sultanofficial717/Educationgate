@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import logo from "@/assets/logo.png";
+import klyverLogo from "@/assets/klyver-ai.png";
 
 const footerLinks = {
   Platform: [
@@ -86,7 +87,7 @@ export function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-12 mt-12 border-t border-primary-foreground/10">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 mt-12 border-t border-primary-foreground/10">
           <p className="text-sm text-primary-foreground/60">
             © 2024 Edu-360. All rights reserved.
           </p>
@@ -104,6 +105,14 @@ export function Footer() {
                 </a>
               );
             })}
+          </div>
+        </div>
+
+        {/* Product Branding */}
+        <div className="flex justify-center items-center pt-8 mt-8 border-t border-primary-foreground/10">
+          <div className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+            <span className="text-xs text-primary-foreground/60 uppercase tracking-wider">A Product of</span>
+            <img src={klyverLogo} alt="KlyverAI" className="h-16 w-auto invert brightness-0" />
           </div>
         </div>
       </div>

@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Calendar, School, Target, BookOpen, Search, ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -11,7 +14,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Calendar, School, Target, BookOpen, Search } from "lucide-react";
 
 const departments = [
   { value: "all", label: "All Departments" },
@@ -108,6 +110,7 @@ const entryTests = [
 ];
 
 const EntryTests = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchType, setSearchType] = useState<"test" | "university">("test");
   const [selectedDepartment, setSelectedDepartment] = useState("all");
@@ -130,6 +133,17 @@ const EntryTests = () => {
       <Navbar />
       <main className="pt-24 pb-16">
         <div className="container px-4 sm:px-6 lg:px-8">
+          {/* Back Button */}
+          <Button
+            onClick={() => navigate(-1)}
+            variant="ghost"
+            size="sm"
+            className="mb-6 text-primary hover:bg-primary/10"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Go Back
+          </Button>
+          
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h1 className="text-4xl font-display font-bold mb-4">Entry Tests Guide</h1>
             <p className="text-muted-foreground text-lg mb-8">

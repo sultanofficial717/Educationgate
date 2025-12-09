@@ -1,4 +1,5 @@
-import { Globe, MapPin, GraduationCap, DollarSign, Clock, ArrowRight, Plane } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Globe, MapPin, GraduationCap, DollarSign, Clock, ArrowRight, ArrowLeft, Plane } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -75,11 +76,25 @@ const countries = [
 ];
 
 export default function StudyAbroad() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       
       <main className="pt-24 pb-20">
+        {/* Back Button */}
+        <div className="container px-4 sm:px-6 lg:px-8 mb-8">
+          <Button
+            onClick={() => navigate(-1)}
+            variant="ghost"
+            size="sm"
+            className="text-primary hover:bg-primary/10"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Go Back
+          </Button>
+        </div>
+        
         {/* Hero Section */}
         <section className="relative overflow-hidden py-16 mb-12">
           <div className="absolute inset-0 bg-gradient-hero opacity-10" />

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, GraduationCap, Calculator, Search, Users, Globe, FileText } from "lucide-react";
+import { Menu, X, GraduationCap, Calculator, Search, Users, Globe, FileText, MessageCircle } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -61,11 +61,12 @@ export function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-3">
-            <AuthModal>
-              <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10">
-                AI Matcher
+            <Link to="/ai-edubot">
+              <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10 flex items-center gap-2">
+                <MessageCircle className="w-4 h-4" />
+                AI EduBot
               </Button>
-            </AuthModal>
+            </Link>
             <AuthModal>
               <Button variant="accent" size="sm">
                 Get Started
@@ -111,11 +112,12 @@ export function Navbar() {
                 );
               })}
               <div className="pt-4 px-4 flex flex-col gap-3">
-                <AuthModal>
-                  <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary/10">
-                    AI Matcher
+                <Link to="/ai-edubot" className="w-full" onClick={() => setIsOpen(false)}>
+                  <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary/10 flex items-center gap-2 justify-center">
+                    <MessageCircle className="w-4 h-4" />
+                    AI EduBot
                   </Button>
-                </AuthModal>
+                </Link>
                 <AuthModal>
                   <Button variant="accent" className="w-full">
                     Get Started

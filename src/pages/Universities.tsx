@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Search, Filter, MapPin, Users, Star, Building2, ChevronDown } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Search, Filter, MapPin, Users, Star, Building2, ChevronDown, ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -86,6 +87,7 @@ const cities = ["All Cities", "Islamabad", "Lahore", "Karachi", "Multiple Cities
 const types = ["All Types", "Public", "Private"];
 
 export default function Universities() {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCity, setSelectedCity] = useState("All Cities");
   const [selectedType, setSelectedType] = useState("All Types");
@@ -107,6 +109,17 @@ export default function Universities() {
       
       <main className="pt-24 pb-20">
         <div className="container px-4 sm:px-6 lg:px-8">
+          {/* Back Button */}
+          <Button
+            onClick={() => navigate(-1)}
+            variant="ghost"
+            size="sm"
+            className="mb-6 text-primary hover:bg-primary/10"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Go Back
+          </Button>
+          
           {/* Header */}
           <div className="mb-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">

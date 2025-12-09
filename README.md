@@ -489,7 +489,7 @@ For questions, issues, or suggestions:
 
 * **GitHub Issues:** [Submit an Issue](https://github.com/sultanofficial717/Educationgate/issues)
 * **Project Repository:** [sultanofficial717/Educationgate](https://github.com/sultanofficial717/Educationgate)
-* **Developer:** Sultan Atiq Ur Rehman
+* **Developer:** Talha Rehman & Awab Sail
 
 ---
 

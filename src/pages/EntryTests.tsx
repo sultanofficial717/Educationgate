@@ -28,84 +28,254 @@ const departments = [
 
 const entryTests = [
   {
-    id: "mdcat",
-    name: "MDCAT",
-    fullName: "Medical & Dental College Admission Test",
-    scope: "Medical & Dental (MBBS, BDS)",
-    universities: "All Public & Private Medical/Dental Colleges in Pakistan",
-    frequency: "Once a year",
-    typicalMonth: "August / September",
-    description: "Mandatory for admission to medical and dental institutions in Pakistan."
+    id: "nat-im",
+    name: "NAT-IM",
+    fullName: "National Aptitude Test - Pre-Medical",
+    scope: "Pre-Medical (Undergraduate)",
+    universities: "NTS Associated Universities",
+    frequency: "Multiple times/year",
+    typicalMonth: "Feb-Mar, May-Jun, Aug, Oct-Nov",
+    description: "General aptitude test for medical students covering biology, chemistry, verbal, quantitative, and analytical reasoning."
+  },
+  {
+    id: "nat-ie",
+    name: "NAT-IE",
+    fullName: "National Aptitude Test - Pre-Engineering",
+    scope: "Pre-Engineering (Undergraduate)",
+    universities: "NTS Associated Universities",
+    frequency: "Multiple times/year",
+    typicalMonth: "Feb-Mar, May-Jun, Aug, Oct-Nov",
+    description: "Engineering aptitude test covering mathematics, physics, verbal, quantitative, and analytical reasoning."
+  },
+  {
+    id: "nat-icom",
+    name: "NAT-ICOM",
+    fullName: "National Aptitude Test - Commerce",
+    scope: "Commerce (Undergraduate)",
+    universities: "NTS Associated Universities",
+    frequency: "Multiple times/year",
+    typicalMonth: "Feb-Mar, May-Jun, Aug, Oct-Nov",
+    description: "Commerce aptitude test covering accounting, economics, verbal, quantitative, and analytical reasoning."
+  },
+  {
+    id: "nat-ia",
+    name: "NAT-IA",
+    fullName: "National Aptitude Test - Arts & Humanities",
+    scope: "Arts & Humanities (Undergraduate)",
+    universities: "NTS Associated Universities",
+    frequency: "Multiple times/year",
+    typicalMonth: "Feb-Mar, May-Jun, Aug, Oct-Nov",
+    description: "Humanities aptitude test covering verbal, analytical, and quantitative reasoning."
+  },
+  {
+    id: "gat-general",
+    name: "GAT-General",
+    fullName: "Graduate Aptitude Test - General",
+    scope: "MS & MPhil Programs",
+    universities: "Most Public Universities",
+    frequency: "Multiple times/year",
+    typicalMonth: "Jan-Dec (multiple sessions)",
+    description: "Graduate aptitude test for MS and MPhil programs covering verbal, quantitative, and analytical reasoning."
+  },
+  {
+    id: "gat-subject",
+    name: "GAT-Subject",
+    fullName: "Graduate Aptitude Test - Subject",
+    scope: "MS & PhD Programs",
+    universities: "Graduate Programs",
+    frequency: "Multiple times/year",
+    typicalMonth: "Jan-Dec (multiple sessions)",
+    description: "Subject-specific test for advanced graduate programs including 30% general and 70% subject-specific content."
   },
   {
     id: "ecat",
     name: "ECAT",
     fullName: "Engineering College Admission Test",
-    scope: "Engineering & Technology",
-    universities: "UET Lahore and its affiliated colleges, many other engineering universities in Punjab",
-    frequency: "Once a year",
-    typicalMonth: "July",
-    description: "Required for admission to UET Lahore and accepted by various other engineering institutes."
-  },
-  {
-    id: "nat",
-    name: "NTS NAT",
-    fullName: "National Aptitude Test",
-    scope: "General (Arts, Science, Engineering, Medical, CS)",
-    universities: "COMSATS, FAST (some campuses), IST, UMT, and many NTS associated universities",
-    frequency: "Monthly (12 times a year)",
-    typicalMonth: "Every Month",
-    description: "A general aptitude test accepted by a wide range of universities for undergraduate admissions."
-  },
-  {
-    id: "usat",
-    name: "HEC USAT",
-    fullName: "Undergraduate Studies Admission Test",
-    scope: "General Undergraduate Admissions",
-    universities: "Accepted by all public sector universities in Pakistan",
-    frequency: "Quarterly (4 times a year)",
-    typicalMonth: "January, April, July, October",
-    description: "Designed by HEC to standardize admissions across public universities."
-  },
-  {
-    id: "lat",
-    name: "HEC LAT",
-    fullName: "Law Admission Test",
-    scope: "Law (LLB 5-Years)",
-    universities: "All Public & Private Law Colleges",
-    frequency: "3-4 times a year",
-    typicalMonth: "Varies",
-    description: "Mandatory for admission to any 5-year LLB program in Pakistan."
+    scope: "Engineering (Undergraduate)",
+    universities: "UET Lahore, NUST, GIKI, PIEAS, and affiliate colleges",
+    frequency: "Once per admission cycle",
+    typicalMonth: "June-July",
+    description: "Major engineering admission test covering mathematics, physics, chemistry/CS, and English with 100 MCQs totaling 400 marks."
   },
   {
     id: "nust-net",
     name: "NUST NET",
     fullName: "NUST Entry Test",
-    scope: "Engineering, CS, Social Sciences, Architecture, Business",
+    scope: "All NUST Undergraduate Programs",
     universities: "National University of Sciences and Technology (NUST)",
-    frequency: "3 Series per year",
-    typicalMonth: "Series 1 (Dec), Series 2 (Feb-Mar), Series 3 (Jun-Jul)",
-    description: "Exclusive test for admission to NUST Islamabad and its campuses."
+    frequency: "4 series/year",
+    typicalMonth: "Feb (NET-1), Apr (NET-2), Jun (NET-3), Dec (NET-4)",
+    description: "NUST's exclusive entry test covering mathematics, physics, English, and intelligence assessment."
+  },
+  {
+    id: "fast-test",
+    name: "FAST Admission Test",
+    fullName: "FAST Entry Test",
+    scope: "Computer Science, Engineering, Business",
+    universities: "FAST - National University of Computer & Emerging Sciences",
+    frequency: "Once per admission cycle",
+    typicalMonth: "June-July",
+    description: "Test for computer science, engineering, and business programs covering mathematics, English, logic, and physics."
   },
   {
     id: "giki",
     name: "GIKI Entry Test",
-    fullName: "GIKI Admission Test",
-    scope: "Engineering, Computer Science, Management Sciences",
+    fullName: "Ghulam Ishaq Khan Institute Entry Test",
+    scope: "Engineering, Computer Science",
     universities: "Ghulam Ishaq Khan Institute (GIKI)",
-    frequency: "Once a year",
-    typicalMonth: "July",
-    description: "Competitive test for admission to GIKI."
+    frequency: "Once per admission cycle",
+    typicalMonth: "June-July",
+    description: "Competitive test for GIKI covering mathematics, physics, English, and analytical reasoning."
   },
   {
     id: "pieas",
     name: "PIEAS Entry Test",
-    fullName: "PIEAS Admission Test",
-    scope: "Engineering, Computer Science",
+    fullName: "Pakistan Institute of Engineering & Applied Sciences Test",
+    scope: "Engineering, Computer Science, Physics",
     universities: "Pakistan Institute of Engineering and Applied Sciences (PIEAS)",
-    frequency: "Once a year",
-    typicalMonth: "June / July",
-    description: "Admission test for one of Pakistan's top engineering institutes."
+    frequency: "Once per admission cycle",
+    typicalMonth: "June-July",
+    description: "Highly selective test for PIEAS including MCQs and interview rounds."
+  },
+  {
+    id: "szabist",
+    name: "SZABIST Test",
+    fullName: "Suleman Dawood School of Business IT Test",
+    scope: "Business, Computer Science, Social Sciences",
+    universities: "SZABIST Islamabad",
+    frequency: "Once per admission cycle",
+    typicalMonth: "June-July",
+    description: "Test covering English, mathematics, and IQ with no negative marking policy."
+  },
+  {
+    id: "habib",
+    name: "Habib University Test",
+    fullName: "Habib University Admission Test",
+    scope: "Liberal Arts, Computer Science, Electrical Engineering",
+    universities: "Habib University",
+    frequency: "Once per admission cycle",
+    typicalMonth: "January-February",
+    description: "Test with MCQs and written components covering English, mathematics, and critical thinking."
+  },
+  {
+    id: "air-uni",
+    name: "Air University CBT",
+    fullName: "Air University Computer-Based Test",
+    scope: "Engineering, Computer Science, Business",
+    universities: "Air University Pakistan",
+    frequency: "Once per admission cycle",
+    typicalMonth: "Mar-Apr, Jun-Jul",
+    description: "Computer-based test with 100 MCQs covering mathematics, physics, English, and IQ."
+  },
+  {
+    id: "bahria",
+    name: "Bahria University CBT",
+    fullName: "Bahria University Computer-Based Test",
+    scope: "Engineering, Computer Science, Business, Social Sciences",
+    universities: "Bahria University Pakistan",
+    frequency: "Once per admission cycle",
+    typicalMonth: "Apr-May, Jul-Aug",
+    description: "Computer-based test with 100 MCQs covering mathematics, English, IQ, and subject-based content."
+  },
+  {
+    id: "uet-taxila",
+    name: "UET Taxila Test",
+    fullName: "University of Engineering & Technology Taxila Entry Test",
+    scope: "Engineering (Undergraduate)",
+    universities: "UET Taxila Campus",
+    frequency: "Once per admission cycle",
+    typicalMonth: "June-July",
+    description: "Engineering test with 100 MCQs totaling 400 marks covering mathematics, physics, chemistry, and English."
+  },
+  {
+    id: "ucp-test",
+    name: "UCP Admission Test",
+    fullName: "University of Central Punjab Test",
+    scope: "Business, Computer Science, Social Sciences",
+    universities: "University of Central Punjab",
+    frequency: "Once per admission cycle",
+    typicalMonth: "May-August",
+    description: "Test with 100 MCQs covering English, mathematics, and IQ with no negative marking."
+  },
+  {
+    id: "sat",
+    name: "SAT",
+    fullName: "Scholastic Assessment Test",
+    scope: "International Universities",
+    universities: "US and international universities accepting SAT",
+    frequency: "Multiple times/year",
+    typicalMonth: "Mar, May, Jun, Aug, Oct, Dec",
+    description: "Standardized test with 1600 score scale covering reading/writing and mathematics."
+  },
+  {
+    id: "act",
+    name: "ACT",
+    fullName: "American College Test",
+    scope: "International Universities",
+    universities: "US and international universities",
+    frequency: "Multiple times/year",
+    typicalMonth: "Feb, Apr, Jun, Jul, Sep, Oct, Dec",
+    description: "Test with composite score (1-36) covering English, mathematics, reading, and science."
+  },
+  {
+    id: "gre",
+    name: "GRE General",
+    fullName: "Graduate Record Examination",
+    scope: "Graduate Programs",
+    universities: "International graduate programs",
+    frequency: "Multiple times/year",
+    typicalMonth: "Year-round (computer-based)",
+    description: "Graduate test with scaled scores for verbal, quantitative, and analytical writing."
+  },
+  {
+    id: "gmat",
+    name: "GMAT",
+    fullName: "Graduate Management Admission Test",
+    scope: "MBA & Business Graduate Programs",
+    universities: "Business schools worldwide",
+    frequency: "Multiple times/year",
+    typicalMonth: "Year-round",
+    description: "Test with scaled scores covering quantitative, verbal, IR, and analytical writing assessment."
+  },
+  {
+    id: "etea",
+    name: "ETEA Entry Test",
+    fullName: "Engineering, Technical & Educational Admissions Test",
+    scope: "Engineering & Computer Science (KPK)",
+    universities: "Engineering colleges in KPK",
+    frequency: "Once per admission cycle",
+    typicalMonth: "July-August",
+    description: "Test with 90 MCQs totaling 100 marks covering mathematics, physics, chemistry/CS, and English."
+  },
+  {
+    id: "iba-test",
+    name: "IBA Aptitude Test",
+    fullName: "Institute of Business Administration Test",
+    scope: "Business & Economics",
+    universities: "Institute of Business Administration",
+    frequency: "Multiple times/year",
+    typicalMonth: "January, March-April",
+    description: "Test with 150 MCQs covering advanced mathematics and English with sectional cutoffs."
+  },
+  {
+    id: "lums",
+    name: "LUMS Test",
+    fullName: "Lahore University of Management Sciences Test",
+    scope: "Multi-discipline Programs",
+    universities: "LUMS (SSE, SDSB, HSS, SAHSOL)",
+    frequency: "Once per admission cycle",
+    typicalMonth: "February-March",
+    description: "Test with 120 MCQs covering mathematics, English, and science aptitude with no negative marking."
+  },
+  {
+    id: "comsats",
+    name: "COMSATS Test",
+    fullName: "COMSATS University Admission Test",
+    scope: "Science, Engineering, Business",
+    universities: "COMSATS University Islamabad",
+    frequency: "Multiple times/year",
+    typicalMonth: "April, June, July",
+    description: "Test with 120 MCQs covering mathematics, English, general knowledge, and subject-based content."
   }
 ];
 
@@ -213,7 +383,11 @@ const EntryTests = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             {filteredTests.map((test) => (
-              <Card key={test.id} className="hover:shadow-lg transition-shadow duration-300 border-primary/10">
+              <Card
+                key={test.id}
+                className="hover:shadow-lg transition-shadow duration-300 border-primary/10 cursor-pointer hover:border-primary/30"
+                onClick={() => navigate(`/entry-tests/${test.id}`)}
+              >
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>

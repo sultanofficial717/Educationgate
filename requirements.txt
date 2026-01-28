@@ -1,0 +1,10 @@
+flask==3.0.0
+flask-cors==4.0.0
+python-dotenv==1.0.0
+pandas==2.1.0
+openpyxl==3.10.0
+sentence-transformers==2.2.2
+numpy==1.24.3
+torch==2.0.1
+mistralai==0.0.11
+googletrans==4.0.0rc1

@@ -9,7 +9,9 @@ import Universities from "./pages/Universities";
 import MeritCalculatorPage from "./pages/MeritCalculatorPage";
 import Tutors from "./pages/Tutors";
 import StudyAbroad from "./pages/StudyAbroad";
+import Scholarships from "./pages/Scholarships";
 import EntryTests from "./pages/EntryTests";
+import EntryTestDetail from "./pages/EntryTestDetail";
 import AiEdubotPage from "./pages/AiEdubotPage";
 import StudentDashboard from "./pages/StudentDashboard";
 import RecruiterDashboard from "./pages/RecruiterDashboard";
@@ -29,8 +31,10 @@ const App = () => (
             <Route path="/universities" element={<Universities />} />
             <Route path="/merit-calculator" element={<MeritCalculatorPage />} />
             <Route path="/entry-tests" element={<EntryTests />} />
+            <Route path="/entry-tests/:testId" element={<EntryTestDetail />} />
             <Route path="/tutors" element={<Tutors />} />
             <Route path="/study-abroad" element={<StudyAbroad />} />
+            <Route path="/scholarships" element={<Scholarships />} />
             <Route path="/ai-edubot" element={<AiEdubotPage />} />
             <Route path="/student-dashboard" element={<StudentDashboard />} />
             <Route path="/recruiter-dashboard" element={<RecruiterDashboard />} />

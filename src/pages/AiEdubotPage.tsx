@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Send, Mic, MicOff, Trash2, Plus, MessageSquare, ArrowLeft } from "lucide-react";
+import { Send, Mic, MicOff, Trash2, Plus, MessageSquare, ArrowLeft, Sparkles, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/context/AuthContext";
 import logo from "@/assets/logo.png";
 
 interface Message {
@@ -15,18 +16,29 @@ interface Message {
   timestamp: Date;
 }
 
+interface UserProfile {
+  educationLevel?: string;
+  budget?: string;
+  careerGoals?: string[];
+  countryPreference?: string;
+  grades?: string;
+}
+
 interface ChatSession {
   id: string;
   title: string;
   messages: Message[];
   createdAt: Date;
+  userProfile?: UserProfile;
 }
 
 export default function AiEdubotPage() {
   const navigate = useNavigate();
+  const { user, isAuthenticated } = useAuth();
   const [sessions, setSessions] = useState<ChatSession[]>([]);
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
+  const [userProfile, setUserProfile] = useState<UserProfile>({});
   const [input, setInput] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -34,6 +46,7 @@ export default function AiEdubotPage() {
   const [sessionToDelete, setSessionToDelete] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [showSplash, setShowSplash] = useState(true);
+  const [showAuthDialog, setShowAuthDialog] = useState(!isAuthenticated);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
@@ -83,10 +96,12 @@ export default function AiEdubotPage() {
       title: `Chat ${new Date().toLocaleDateString()}`,
       messages: [],
       createdAt: new Date(),
+      userProfile: {},
     };
     setSessions([newSession, ...sessions]);
     setCurrentSessionId(newSession.id);
     setMessages([]);
+    setUserProfile({});
   };
 
   const sendMessage = async (text: string) => {
@@ -110,11 +125,35 @@ export default function AiEdubotPage() {
     setInput("");
     setIsLoading(true);
 
-    // Simulate bot response (replace with actual API call)
-    setTimeout(() => {
+    try {
+      // Call EduHire AI backend API
+      const response = await fetch('http://localhost:5000/api/edubot', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: text,
+          userProfile,
+          conversationHistory: updatedMessages,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get response from backend');
+      }
+
+      const data = await response.json();
+      
+      // Update user profile if new info was collected
+      if (data.updatedProfile) {
+        setUserProfile(data.updatedProfile);
+      }
+      
+      // Create bot response with EduHire AI answer
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: getBotResponse(text),
+        content: data.answer || 'Unable to process your question. Please try again.',
         sender: "bot",
         timestamp: new Date(),
       };
@@ -122,15 +161,32 @@ export default function AiEdubotPage() {
       const finalMessages = [...updatedMessages, botMessage];
       setMessages(finalMessages);
 
-      // Update session
+      // Update session with new messages and profile
       setSessions(sessions.map(s =>
         s.id === currentSessionId
-          ? { ...s, messages: finalMessages }
+          ? { 
+              ...s, 
+              messages: finalMessages,
+              userProfile: data.updatedProfile || userProfile
+            }
           : s
       ));
 
       setIsLoading(false);
-    }, 800);
+    } catch (error) {
+      console.error('Error:', error);
+      
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: '🤖 I encountered a connection error. Please ensure the backend server is running on http://localhost:5000. Alternatively, I can still help with general education guidance!',
+        sender: "bot",
+        timestamp: new Date(),
+      };
+
+      const finalMessages = [...updatedMessages, errorMessage];
+      setMessages(finalMessages);
+      setIsLoading(false);
+    }
   };
 
   const getBotResponse = (userInput: string): string => {
@@ -218,10 +274,10 @@ export default function AiEdubotPage() {
           {/* Tagline with fade-in animation */}
           <div className="space-y-4">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold leading-tight animate-fade-in-up">
-              <span className="text-gradient">AI EduBot</span>
+              <span className="text-gradient">EduHire AI</span>
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground font-body animate-fade-in-up max-w-lg" style={{ animationDelay: '0.2s' }}>
-              Education for Everyone
+              Your Intelligent Education & Career Counselor
             </p>
             
             {/* Loading indicator */}
@@ -232,6 +288,85 @@ export default function AiEdubotPage() {
             </div>
           </div>
         </div>
+        
+        {/* Authentication Required Dialog */}
+        <Dialog open={showAuthDialog && !isAuthenticated} onOpenChange={setShowAuthDialog}>
+          <DialogContent className="bg-gradient-to-br from-background to-primary/3 border-primary/15 sm:max-w-md">
+            <DialogHeader>
+              <div className="flex justify-center mb-4">
+                <Lock className="w-12 h-12 text-primary opacity-80" />
+              </div>
+              <DialogTitle className="text-center text-2xl">Sign In Required</DialogTitle>
+              <DialogDescription className="text-center mt-2">
+                You need to sign in to access the EduHire AI counselor and get personalized education guidance.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="flex flex-col gap-3 mt-6">
+              <Button
+                onClick={() => navigate("/student-dashboard")}
+                className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground h-12 font-semibold"
+              >
+                Sign In Now
+              </Button>
+              <Button
+                onClick={() => navigate("/")}
+                variant="outline"
+                className="border-primary/20 h-12 font-semibold"
+              >
+                Go Back to Home
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground text-center mt-4">
+              Don't have an account? Sign up on the sign-in page.
+            </p>
+          </DialogContent>
+        </Dialog>
+      </div>
+    );
+  }
+
+  // Authentication Guard - Show dialog if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/3 pt-20 flex items-center justify-center">
+        {/* Decorative background elements */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-20 left-10 w-96 h-96 bg-primary/8 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/6 rounded-full blur-3xl" />
+        </div>
+
+        {/* Auth Dialog */}
+        <Dialog open={true}>
+          <DialogContent className="bg-gradient-to-br from-background to-primary/3 border-primary/15 sm:max-w-md">
+            <DialogHeader>
+              <div className="flex justify-center mb-4">
+                <Lock className="w-12 h-12 text-primary opacity-80" />
+              </div>
+              <DialogTitle className="text-center text-2xl">Sign In Required</DialogTitle>
+              <DialogDescription className="text-center mt-2">
+                You need to sign in to access the EduHire AI counselor and get personalized education guidance.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="flex flex-col gap-3 mt-6">
+              <Button
+                onClick={() => navigate("/student-dashboard")}
+                className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground h-12 font-semibold"
+              >
+                Sign In Now
+              </Button>
+              <Button
+                onClick={() => navigate("/")}
+                variant="outline"
+                className="border-primary/20 h-12 font-semibold"
+              >
+                Go Back to Home
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground text-center mt-4">
+              Don't have an account? Sign up on the sign-in page.
+            </p>
+          </DialogContent>
+        </Dialog>
       </div>
     );
   }
@@ -347,10 +482,13 @@ export default function AiEdubotPage() {
               <MessageSquare className="w-5 h-5 text-primary" />
             </button>
             <div className="flex-1">
-              <h1 className="text-2xl font-bold text-gradient">
-                AI EduBot
-              </h1>
-              <p className="text-sm text-muted-foreground">Your intelligent education assistant</p>
+              <div className="flex items-center gap-2">
+                <h1 className="text-2xl font-bold text-gradient">
+                  EduHire AI
+                </h1>
+                <Sparkles className="w-5 h-5 text-accent" />
+              </div>
+              <p className="text-sm text-muted-foreground">Your intelligent education & career counselor</p>
             </div>
           </div>
 
@@ -358,11 +496,21 @@ export default function AiEdubotPage() {
           <ScrollArea className="flex-1 p-6">
             {messages.length === 0 && (
               <div className="flex flex-col items-center justify-center h-full text-center">
-                <MessageSquare className="w-16 h-16 text-primary/20 mb-4" />
-                <h2 className="text-2xl font-bold text-foreground mb-2">Welcome to AI EduBot</h2>
-                <p className="text-muted-foreground max-w-md">
-                  Ask me anything about universities, entrance exams, merit calculations, tutors, or study abroad opportunities!
+                <Sparkles className="w-16 h-16 text-primary/20 mb-4" />
+                <h2 className="text-2xl font-bold text-foreground mb-2">Welcome to EduHire AI</h2>
+                <p className="text-muted-foreground max-w-md mb-6">
+                  I'm your intelligent education & career counselor. I'll help you find the best path for universities, scholarships, entrance exams, and career guidance.
                 </p>
+                <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 max-w-md text-left space-y-2">
+                  <p className="text-sm font-semibold text-foreground">Start by telling me about:</p>
+                  <ul className="text-xs text-muted-foreground space-y-1">
+                    <li>✓ Your education background</li>
+                    <li>✓ Budget & financial situation</li>
+                    <li>✓ Career goals & interests</li>
+                    <li>✓ Country preferences</li>
+                    <li>✓ Entrance exam queries</li>
+                  </ul>
+                </div>
               </div>
             )}
             {messages.map((message) => (
@@ -434,7 +582,7 @@ export default function AiEdubotPage() {
                     sendMessage(input);
                   }
                 }}
-                placeholder="Ask me anything about education..."
+                placeholder="Tell me about your education goals and background..."
                 className="bg-gradient-to-r from-primary/5 to-accent/3 border-primary/20 focus:border-primary shadow-sm"
                 disabled={isLoading}
               />
@@ -475,6 +623,39 @@ export default function AiEdubotPage() {
               Delete
             </Button>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Authentication Required Dialog */}
+      <Dialog open={showAuthDialog} onOpenChange={setShowAuthDialog}>
+        <DialogContent className="bg-gradient-to-br from-background to-primary/3 border-primary/15 sm:max-w-md">
+          <DialogHeader>
+            <div className="flex justify-center mb-4">
+              <Lock className="w-12 h-12 text-primary opacity-80" />
+            </div>
+            <DialogTitle className="text-center text-2xl">Sign In Required</DialogTitle>
+            <DialogDescription className="text-center mt-2">
+              You need to sign in to access the EduHire AI counselor and get personalized education guidance.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col gap-3 mt-6">
+            <Button
+              onClick={() => navigate("/student-dashboard")}
+              className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground h-12 font-semibold"
+            >
+              Sign In Now
+            </Button>
+            <Button
+              onClick={() => navigate("/")}
+              variant="outline"
+              className="border-primary/20 h-12 font-semibold"
+            >
+              Go Back to Home
+            </Button>
+          </div>
+          <p className="text-xs text-muted-foreground text-center mt-4">
+            Don't have an account? Sign up on the sign-in page.
+          </p>
         </DialogContent>
       </Dialog>
     </div>

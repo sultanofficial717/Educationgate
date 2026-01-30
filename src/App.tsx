@@ -14,6 +14,7 @@ import EntryTests from "./pages/EntryTests";
 import EntryTestDetail from "./pages/EntryTestDetail";
 import AiEdubotPage from "./pages/AiEdubotPage";
 import StudentDashboard from "./pages/StudentDashboard";
+import ProfileSetup from "./pages/ProfileSetup";
 import RecruiterDashboard from "./pages/RecruiterDashboard";
 import NotFound from "./pages/NotFound";
 
@@ -36,6 +37,7 @@ const App = () => (
             <Route path="/study-abroad" element={<StudyAbroad />} />
             <Route path="/scholarships" element={<Scholarships />} />
             <Route path="/ai-edubot" element={<AiEdubotPage />} />
+            <Route path="/profile-setup" element={<ProfileSetup />} />
             <Route path="/student-dashboard" element={<StudentDashboard />} />
             <Route path="/recruiter-dashboard" element={<RecruiterDashboard />} />
             <Route path="*" element={<NotFound />} />

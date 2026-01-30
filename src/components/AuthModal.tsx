@@ -25,6 +25,7 @@ export function AuthModal({ children }: { children: React.ReactNode }) {
   const [lastName, setLastName] = useState("");
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
+  const [showSetupDialog, setShowSetupDialog] = useState(false);
   const { login, register } = useAuth();
   const navigate = useNavigate();
 
@@ -70,11 +71,11 @@ export function AuthModal({ children }: { children: React.ReactNode }) {
     setTimeout(() => {
       if (register(email, password, firstName, lastName, userType)) {
         setIsLoading(false);
-        setOpen(false);
-        // Navigate to appropriate dashboard
+        // For students, show setup dialog. For recruiters, go to dashboard
         if (userType === "student") {
-          navigate("/student-dashboard");
+          setShowSetupDialog(true);
         } else {
+          setOpen(false);
           navigate("/recruiter-dashboard");
         }
       } else {
@@ -262,6 +263,41 @@ export function AuthModal({ children }: { children: React.ReactNode }) {
             </div>
           </TabsContent>
         </Tabs>
+
+        {/* Setup Dialog */}
+        {showSetupDialog && (
+          <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
+            <div className="bg-card border border-border rounded-lg p-6 max-w-sm mx-4">
+              <h2 className="text-2xl font-bold text-foreground mb-2">Complete Your Profile?</h2>
+              <p className="text-muted-foreground mb-6">
+                Would you like to set up your profile now or do it later?
+              </p>
+              <div className="flex gap-3">
+                <Button
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => {
+                    setShowSetupDialog(false);
+                    setOpen(false);
+                    navigate("/student-dashboard");
+                  }}
+                >
+                  Later
+                </Button>
+                <Button
+                  className="flex-1 bg-primary hover:bg-primary/90"
+                  onClick={() => {
+                    setShowSetupDialog(false);
+                    setOpen(false);
+                    navigate("/profile-setup");
+                  }}
+                >
+                  Setup Now
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );

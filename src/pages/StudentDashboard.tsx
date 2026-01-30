@@ -12,6 +12,7 @@ export default function StudentDashboard() {
   const { user, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
+  const [profileSetupData, setProfileSetupData] = useState<any>(null);
   const [profileData, setProfileData] = useState({
     headline: "Computer Science Student | Aspiring Software Engineer",
     about: "Passionate about technology and building innovative solutions. Experienced in full-stack development with modern web technologies.",
@@ -47,6 +48,26 @@ export default function StudentDashboard() {
       { id: 1, title: "AI-Powered Code Generation", focus: "Machine Learning", date: "2024", description: "Researching how AI can improve developer productivity" }
     ]
   });
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/");
+    }
+    
+    // Load profile setup data if exists
+    const savedProfileSetup = localStorage.getItem("profileSetup");
+    if (savedProfileSetup) {
+      setProfileSetupData(JSON.parse(savedProfileSetup));
+      // Update profile data with setup data
+      const setupData = JSON.parse(savedProfileSetup);
+      setProfileData(prev => ({
+        ...prev,
+        about: setupData.bio || prev.about,
+        location: setupData.location || prev.location,
+        phone: setupData.phone || prev.phone,
+      }));
+    }
+  }, [isAuthenticated, navigate]);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -183,6 +204,70 @@ export default function StudentDashboard() {
                     </div>
                   </div>
                 </Card>
+
+                {/* Test Scores Section */}
+                {profileSetupData && (profileSetupData.testScores?.ielts?.hasScore || profileSetupData.testScores?.entryTest?.hasScore) && (
+                  <Card className="border-primary/20 p-6">
+                    <h3 className="text-lg font-bold mb-4 flex items-center">
+                      <Award className="w-5 h-5 mr-2 text-primary" />
+                      Your Test Scores
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {profileSetupData.testScores?.ielts?.hasScore && (
+                        <div className="p-4 bg-gradient-to-br from-blue-500/10 to-blue-600/5 border border-blue-500/20 rounded-lg">
+                          <h4 className="font-semibold text-blue-600 mb-3">IELTS Score</h4>
+                          <div className="space-y-2 text-sm">
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">Overall Band:</span>
+                              <span className="font-bold text-blue-600">{profileSetupData.testScores.ielts.overallBand}/9.0</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">Listening:</span>
+                              <span className="font-bold">{profileSetupData.testScores.ielts.listeningBand}/9.0</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">Reading:</span>
+                              <span className="font-bold">{profileSetupData.testScores.ielts.readingBand}/9.0</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">Writing:</span>
+                              <span className="font-bold">{profileSetupData.testScores.ielts.writingBand}/9.0</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">Speaking:</span>
+                              <span className="font-bold">{profileSetupData.testScores.ielts.speakingBand}/9.0</span>
+                            </div>
+                            <div className="text-xs text-muted-foreground mt-3 pt-3 border-t border-blue-500/20">
+                              Test Date: {new Date(profileSetupData.testScores.ielts.testDate).toLocaleDateString()}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      {profileSetupData.testScores?.entryTest?.hasScore && (
+                        <div className="p-4 bg-gradient-to-br from-purple-500/10 to-purple-600/5 border border-purple-500/20 rounded-lg">
+                          <h4 className="font-semibold text-purple-600 mb-3">Entry Test Score</h4>
+                          <div className="space-y-2 text-sm">
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">Test:</span>
+                              <span className="font-bold text-purple-600">{profileSetupData.testScores.entryTest.testName}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">Obtained Marks:</span>
+                              <span className="font-bold">{profileSetupData.testScores.entryTest.obtainedMarks}/{profileSetupData.testScores.entryTest.totalMarks}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">Percentage:</span>
+                              <span className="font-bold text-purple-600">{profileSetupData.testScores.entryTest.percentage}%</span>
+                            </div>
+                            <div className="text-xs text-muted-foreground mt-3 pt-3 border-t border-purple-500/20">
+                              Test Date: {new Date(profileSetupData.testScores.entryTest.testDate).toLocaleDateString()}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </Card>
+                )}
               </TabsContent>
 
               {/* Applications Tab */}
@@ -261,7 +346,13 @@ export default function StudentDashboard() {
                         <a href={`https://${profileData.website}`} target="_blank" className="text-primary hover:underline">{profileData.website}</a>
                       </div>
                     </div>
-                    <Button className="bg-gradient-to-r from-primary to-accent">Edit Profile</Button>
+                    <Button 
+                      onClick={() => navigate("/profile-setup")}
+                      className="bg-gradient-to-r from-primary to-accent hover:shadow-lg transition-all"
+                    >
+                      <Edit2 className="w-4 h-4 mr-2" />
+                      Edit Profile
+                    </Button>
                   </div>
                 </Card>
 

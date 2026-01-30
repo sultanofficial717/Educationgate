@@ -6,6 +6,7 @@ export interface User {
   name: string;
   userType: 'student' | 'recruiter';
   profileComplete: boolean;
+  isNewUser?: boolean;
 }
 
 interface AuthContextType {
@@ -62,7 +63,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       email,
       name: `${firstName} ${lastName}`,
       userType,
-      profileComplete: true,
+      profileComplete: false,
+      isNewUser: true,
     };
     setUser(newUser);
     localStorage.setItem('user', JSON.stringify(newUser));

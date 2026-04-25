@@ -127,7 +127,8 @@ export default function AiEdubotPage() {
 
     try {
       // Call EduHire AI backend API
-      const response = await fetch('http://localhost:5000/api/edubot', {
+      const apiUrl = process.env.VITE_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/edubot`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -178,7 +179,7 @@ export default function AiEdubotPage() {
       
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: '🤖 I encountered a connection error. Please ensure the backend server is running on http://localhost:5000. Alternatively, I can still help with general education guidance!',
+        content: '🤖 I encountered a connection error. Please check your internet connection and try again. If the issue persists, the backend service may be temporarily unavailable.',
         sender: "bot",
         timestamp: new Date(),
       };

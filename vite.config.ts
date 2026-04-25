@@ -8,8 +8,11 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     middlewareMode: false,
-  },
-  plugins: [react()].filter(Boolean),
+  },  build: {
+    outDir: "dist",
+    sourcemap: false,
+    minify: "terser",
+  },  plugins: [react()].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
